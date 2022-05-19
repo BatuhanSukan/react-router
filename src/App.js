@@ -1,57 +1,43 @@
 import './App.css';
 import React from "react";
 import {
-  BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+  BrowserRouter as Router, Routes, Route, NavLink} from "react-router-dom";
 
+import Home from "./components/Home";
+import About from "./components/About";
+import Users from "./components/Users";
+import Error404 from "./components/Error404.js";
+ 
+  function App() {
+    return (
+      <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <NavLink activeStyle={{ backgroundColor: 'blue', color: '#fff' }} to="/" exact >Home</NavLink>
+            </li>
+            <li>
+              <NavLink activeStyle={{ backgroundColor: 'blue', color: '#fff' }} to="/about">About</NavLink>
+            </li>
+            <li>
+              <NavLink activeStyle={{ backgroundColor: 'blue', color: '#fff' }} to="/users">Users</NavLink>
+            </li>
+          </ul>
+        </nav>
+  
+        <Routes>
+          <Route path="/" exact component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/users" component={Users} /> 
+          <Route path="*" component={Error404} /> 
+        </Routes>
+      </div>
+    </Router>
+    );
+  }
 
+  
 
-function App() {
-  return (
-    <Router>
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-            <a href='/'>Home</a>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/users">Users</Link>
-          </li>
-        </ul>
-      </nav>
-
-      {/* A <Switch> looks through its children <Route>s and
-          renders the first one that matches the current URL. */}
-      <Switch>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/users">
-          <Users />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </div>
-  </Router>
-  );
-}
-
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
 
 export default App;
